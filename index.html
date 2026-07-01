@@ -1,0 +1,1205 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Rental Comparison Tool - Sheena &amp; Rosh Issac Property Group</title>
+<meta name="description" content="A complimentary, private tool from Sheena &amp; Rosh Issac Property Group to help you compare the rentals you're considering, side by side, and see which one really fits.">
+<meta name="theme-color" content="#09090b">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Rental Comparison Tool - Sheena &amp; Rosh Issac Property Group">
+<meta property="og:description" content="Compare the rentals you're weighing, side by side, on the things that actually matter. A free tool, no login, saved privately on your device only.">
+<meta property="og:site_name" content="Sheena &amp; Rosh Issac Property Group">
+
+<!-- Favicon (inline SVG - no external requests) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2309090b'/%3E%3Cpath d='M32 14 L52 30 L47 30 L47 50 L37 50 L37 36 L27 36 L27 50 L17 50 L17 30 L12 30 Z' fill='%23c9962e'/%3E%3C/svg%3E">
+
+<!-- Web App Manifest (inline data URI - keeps this a single self-contained file) -->
+<link rel="manifest" href="data:application/manifest+json,%7B%22name%22%3A%22Rental%20Comparison%20Tool%22%2C%22short_name%22%3A%22Rental%20Compare%22%2C%22start_url%22%3A%22.%22%2C%22display%22%3A%22standalone%22%2C%22background_color%22%3A%22%2309090b%22%2C%22theme_color%22%3A%22%2309090b%22%2C%22icons%22%3A%5B%7B%22src%22%3A%22data%3Aimage%2Fsvg%2Bxml%2C%253Csvg%2520xmlns%3D%2527http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%2527%2520viewBox%3D%25270%25200%252064%252064%2527%253E%253Crect%2520width%3D%252764%2527%2520height%3D%252764%2527%2520rx%3D%252714%2527%2520fill%3D%2527%252309090b%2527%2F%253E%253Cpath%2520d%3D%2527M32%252014%2520L52%252030%2520L47%252030%2520L47%252050%2520L37%252050%2520L37%252036%2520L27%252036%2520L27%252050%2520L17%252050%2520L17%252030%2520L12%252030%2520Z%2527%2520fill%3D%2527%2523c9962e%2527%2F%253E%253C%2Fsvg%253E%22%2C%22sizes%22%3A%22any%22%2C%22type%22%3A%22image%2Fsvg%2Bxml%22%7D%5D%7D">
+
+<style>
+/* ============================================================
+   The Issac House Style - Rental Comparison Tool
+   Signature accent for this app: Honey Gold #c9962e
+   Tokens/radii/shadows reconciled against mockups/kit.css
+   (IssacRealty_DigitalCard). Fraunces self-hosted, same-origin
+   -> zero third-party on first paint (suite guardrail).
+   ============================================================ */
+
+@font-face {
+  font-family: 'Fraunces';
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url('assets/fraunces-latin-var.woff2') format('woff2');
+}
+
+* , *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; padding: 0; }
+
+:root{
+  /* Surfaces & text - reconciled to kit.css (--c-* names in comments) */
+  --ink:        #09090b;             /* --c-paper : near-black hero */
+  --ink-soft:   #16151b;             /* --c-card  : raised surface on dark */
+  --ivory:      #f3efe9;             /* --c-ivory : light workspace bg */
+  --ivory-2:    #e9e2d6;             /* warm neutral fill (tracks, row-heads) */
+  --card:       #fbf9f5;             /* --c-ivory-card : raised surface on light */
+  --line:       rgba(28,27,32,.10);  /* --c-hair-l : hairline on light */
+  --text:       #1c1b20;             /* --c-charcoal : text on light */
+  --text-soft:  #857c6f;             /* --c-muted-l : secondary text on light */
+  --white:      #ffffff;
+
+  /* Warm-white family for text on dark (kit: never pure white) */
+  --c-ink:      #f4eee2;
+  --c-ink-soft: #d9d3c6;
+  --c-muted:    #a79f91;
+  --hair-d:     rgba(244,238,226,.12);  /* --c-hair-d : hairline on dark */
+
+  /* Per-app signature accent - Honey Gold, confirmed by Rosh (locked) */
+  --app-accent:      #c9962e;
+  --app-accent-dark: #7a5711;   /* AA-safe honey for accent TEXT on ivory + gradient start */
+  --app-accent-tint: #f6e9cc;
+  --app-accent-soft: rgba(201,150,46,.16);   /* hero glow */
+
+  /* Shared gold CTA (kit constant - CTA only, distinct from the accent) */
+  --c-gold:    #c9a25e;
+  --grad-gold: linear-gradient(120deg,#dcbf86,#c9a25e 50%,#b08438);
+
+  --good:  #3f7a4e;
+  --radius: 14px;       /* --radius-md : panels */
+  --radius-sm: 11px;    /* --radius-sm : inputs, chips */
+  --shadow: 0 24px 60px rgba(0,0,0,.14);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.04), 0 12px 26px rgba(28,27,32,.06);  /* kit .panel shadow */
+
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, Roboto, Helvetica, Arial, sans-serif;
+  --serif: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+}
+
+body{
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+}
+
+a { color: inherit; }
+
+button, input, select, textarea { font-family: inherit; font-size: 15px; }
+
+@media (prefers-reduced-motion: reduce){
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- App shell: stationary hero / scrolling workspace / stationary band ---------- */
+.app-shell{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* ---- HERO (stationary) ---- */
+.hero{
+  flex: 0 0 auto;
+  position: relative;
+  background:
+    radial-gradient(120% 80% at 78% 6%, var(--app-accent-soft), transparent 60%),
+    radial-gradient(120% 160% at 15% 0%, #14130f 0%, var(--ink) 55%),
+    var(--ink);
+  color: var(--c-ink);
+  padding: 40px 24px 30px;
+  border-bottom: 1px solid #000;
+}
+.hero-inner{ max-width: 980px; margin: 0 auto; }
+.hero-kicker{
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: var(--app-accent);
+  margin-bottom: 10px;
+}
+.hero h1{
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: clamp(26px, 4.2vw, 40px);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  margin: 0 0 12px;
+  color: var(--c-ink);
+}
+.hero p{
+  font-size: 15px;
+  color: var(--c-ink-soft);
+  max-width: 640px;
+  margin: 0 0 6px;
+}
+.hero .hero-credit{
+  font-size: 12.5px;
+  color: var(--c-muted);
+  margin-top: 10px;
+}
+.hero .hero-credit strong{ color: var(--c-ink); font-weight: 700; }
+
+/* ---- WORKSPACE (scrolls) ---- */
+.workspace{
+  flex: 1 1 auto;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  background: var(--ivory);
+}
+.workspace-inner{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 28px 20px 60px;
+}
+
+.section{ margin-bottom: 40px; }
+.section-head{ margin-bottom: 16px; }
+.section-eyebrow{
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--app-accent-dark);
+  margin-bottom: 6px;
+}
+.section-head h2{
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 6px;
+  color: var(--text);
+}
+.section-head p{
+  font-size: 14px;
+  color: var(--text-soft);
+  margin: 0;
+  max-width: 640px;
+}
+
+/* ---- Unit cards (input) ---- */
+.units-row{
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px;
+}
+.unit-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.unit-card-head{
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.unit-card-head input{
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  font-size: 14.5px;
+  padding: 6px 4px;
+  min-height: 32px;
+  border-bottom: 1px dashed rgba(255,255,255,.25);
+}
+.unit-card-head input::placeholder{ color: rgba(255,255,255,.55); }
+.unit-card-head input:focus{ outline: none; border-bottom-color: var(--app-accent); }
+.unit-remove{
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.3);
+  color: #f2ebda;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.unit-remove:hover{ background: rgba(255,255,255,.12); }
+
+.unit-card-body{ padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+.field{ display: flex; flex-direction: column; gap: 4px; }
+.field-label{
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  letter-spacing: .3px;
+}
+.field-hint{ font-size: 11.5px; color: #8b8168; margin-top: -2px; }
+.field input[type="text"],
+.field input[type="number"],
+.field select,
+.field textarea{
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 11px 13px;
+  min-height: 44px;
+  background: var(--white);
+  color: var(--text);
+}
+.field textarea{ min-height: 64px; resize: vertical; font-family: var(--sans); }
+.field input:focus, .field select:focus, .field textarea:focus{
+  outline: none;
+  border-color: var(--app-accent);
+  box-shadow: 0 0 0 3px var(--app-accent-tint);
+}
+.field-row2{ display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.field-slider{ display:flex; align-items:center; gap:10px; }
+.field-slider input[type="range"]{
+  flex: 1;
+  accent-color: var(--app-accent);
+  height: 36px;
+}
+.field-slider-val{
+  min-width: 84px;
+  text-align: right;
+  font-size: 12.5px;
+  color: var(--text-soft);
+  font-weight: 600;
+}
+
+.units-controls{
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 14px;
+}
+
+/* ---- Buttons ---- */
+.btn{
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 999px;
+  padding: 11px 20px;
+  min-height: 44px;
+  font-weight: 700;
+  font-size: 14.5px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
+}
+.btn:active{ transform: translateY(1px); }
+.btn-gold{
+  background: var(--grad-gold);
+  color: #241a07;
+  box-shadow: 0 8px 22px rgba(176,132,56,.32);
+}
+.btn-ghost{
+  background: transparent;
+  color: var(--text);
+  border: 1.5px solid var(--line);
+}
+.btn-ghost:hover{ border-color: var(--app-accent); color: var(--app-accent-dark); }
+.btn-dark{
+  background: var(--ink);
+  color: #fff;
+}
+.btn-dark:hover{ background: #26241d; }
+.btn[disabled]{ opacity: .45; cursor: not-allowed; }
+
+/* ---- Priority weighting ---- */
+.weights-card{
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  padding: 6px 6px;
+}
+.weight-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.weight-row:last-child{ border-bottom: none; }
+.weight-label{ font-size: 14px; font-weight: 600; color: var(--text); }
+.pill-group{ display: inline-flex; border: 1.5px solid var(--line); border-radius: 999px; overflow: hidden; }
+.pill-group button{
+  appearance: none;
+  border: none;
+  background: var(--white);
+  color: var(--text-soft);
+  padding: 8px 13px;
+  min-height: 40px;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  border-right: 1px solid var(--line);
+  white-space: nowrap;
+}
+.pill-group button:last-child{ border-right: none; }
+.pill-group button.active{ background: var(--app-accent); color: var(--ink); }
+.pill-group button:hover:not(.active){ background: var(--ivory-2); }
+
+/* ---- Results ---- */
+.results-note{
+  background: var(--ivory-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  font-size: 13.5px;
+  color: var(--text-soft);
+  margin-bottom: 18px;
+}
+
+.score-bars{ display: flex; flex-direction: column; gap: 12px; margin-bottom: 22px; }
+.score-bar-row{ display: flex; align-items: center; gap: 12px; }
+.score-bar-name{
+  width: 140px;
+  flex-shrink: 0;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.score-bar-track{
+  flex: 1;
+  background: var(--ivory-2);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  height: 22px;
+  overflow: hidden;
+  position: relative;
+}
+.score-bar-fill{
+  height: 100%;
+  background: linear-gradient(90deg, var(--app-accent-dark), var(--app-accent));
+  border-radius: 999px 0 0 999px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 8px;
+}
+.score-bar-fill.leader{ background: linear-gradient(90deg, #1f6b34, #3f9a5b); }
+.score-bar-pct{ color: var(--ink); font-size: 11.5px; font-weight: 800; }
+.score-bar-fill.leader .score-bar-pct{ color: #fff; }
+
+.best-fit-callout{
+  background: var(--ink);
+  color: #f6f2e8;
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.best-fit-callout .tag{
+  background: var(--app-accent);
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: .5px;
+  border-radius: 999px;
+  padding: 5px 10px;
+}
+.best-fit-callout p{ margin: 0; font-size: 14.5px; color: #e9e2cf; }
+.best-fit-callout strong{ color: #fff; }
+
+/* comparison table */
+.compare-wrap{ overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); box-shadow: var(--shadow-sm); }
+table.compare{ border-collapse: collapse; width: 100%; min-width: 480px; table-layout: fixed; }
+table.compare th, table.compare td{
+  text-align: left;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line);
+  font-size: 13.5px;
+  vertical-align: top;
+  word-break: break-word;
+}
+table.compare thead th{
+  background: var(--ink);
+  color: #fff;
+  font-size: 12.5px;
+}
+/* sticky label column so you always know which row you're on while swiping through units on a phone */
+table.compare thead th:first-child,
+table.compare tbody th{
+  position: sticky;
+  left: 0;
+  z-index: 2;
+  box-shadow: 2px 0 6px rgba(0,0,0,.08);
+}
+table.compare thead th:first-child{ z-index: 3; background: var(--ink); }
+table.compare tbody th{
+  background: var(--ivory-2);
+  font-weight: 700;
+  color: var(--text-soft);
+  width: 128px;
+}
+table.compare td.best{ background: #eef6ef; color: var(--good); font-weight: 700; }
+table.compare tr:last-child td, table.compare tr:last-child th{ border-bottom: none; }
+
+.swipe-hint{
+  display: none;
+  font-size: 11.5px;
+  color: var(--text-soft);
+  text-align: center;
+  padding: 7px 10px 0;
+}
+.swipe-hint.show{ display: block; }
+@media (min-width: 720px){ .swipe-hint{ display: none !important; } }
+
+/* ---- restore / start-over ---- */
+.restored-banner{
+  display: none;
+  align-items: center;
+  gap: 10px;
+  background: var(--app-accent-tint);
+  border: 1px solid #ecd8a4;
+  border-radius: var(--radius-sm);
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #6b4f16;
+  margin-bottom: 16px;
+}
+.restored-banner.show{ display: flex; flex-wrap: wrap; }
+.section-head-row{ display: flex; align-items: flex-end; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.start-over-link{
+  background: none;
+  border: none;
+  color: var(--text-soft);
+  font-size: 12.5px;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 6px 2px;
+}
+.start-over-link:hover{ color: var(--app-accent-dark); }
+
+/* ---- Nudge / soft CTA ---- */
+.nudge-card{
+  background: linear-gradient(135deg, #fff, var(--app-accent-tint));
+  border: 1px solid #ecd8a4;
+  border-radius: var(--radius);
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.nudge-card h3{
+  font-family: var(--serif);
+  font-weight: 500;
+  font-size: 20px;
+  margin: 0;
+  color: var(--text);
+}
+.nudge-card p{ margin: 0; font-size: 14px; color: var(--text-soft); max-width: 620px; }
+.nudge-actions{ display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+
+/* ---- BROKERAGE BAND (stationary) ---- */
+.brokerage-band{
+  flex: 0 0 auto;
+  background: var(--ink);
+  color: #cfc8b6;
+  border-top: 1px solid #000;
+  padding: 12px 20px;
+}
+.brokerage-inner{
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.brokerage-team{ font-size: 13px; font-weight: 700; color: var(--c-ink); }
+.brokerage-brokerage{ font-size: 12px; color: var(--c-muted); }
+.brokerage-contact{ font-size: 12.5px; display: flex; gap: 14px; flex-wrap: wrap; }
+.brokerage-contact a{ color: var(--app-accent); text-decoration: none; font-weight: 600; }
+.brokerage-contact a:hover{ text-decoration: underline; }
+.brokerage-privacy{ font-size: 11px; color: #78715f; width: 100%; margin-top: 6px; }
+
+/* ---- Print styles ---- */
+@media print{
+  .app-shell{ display: block; height: auto; overflow: visible; }
+  .hero{ background: #fff !important; color: #000 !important; border-bottom: 2px solid #09090b; }
+  .hero-kicker{ color: #09090b; }
+  .hero h1{ color: #000; }
+  .hero p, .hero-credit{ color: #333 !important; }
+  .workspace{ overflow: visible; }
+  .units-row, .weights-card, .nudge-card, .units-controls, .no-print{ display: none !important; }
+  .brokerage-band{ background: #fff !important; color: #000 !important; border-top: 2px solid #09090b; }
+  .brokerage-team, .brokerage-brokerage{ color: #000 !important; }
+  .brokerage-contact a{ color: #000 !important; }
+  .best-fit-callout{ background: #f2ebda !important; color: #000 !important; }
+  .best-fit-callout p, .best-fit-callout strong{ color: #000 !important; }
+  a[href]::after{ content: ""; }
+}
+
+@media (max-width: 640px){
+  .score-bar-name{ width: 96px; }
+  .weight-row{ flex-direction: column; align-items: flex-start; }
+  table.compare th, table.compare td{ padding: 8px 9px; font-size: 11.5px; }
+  table.compare thead th{ font-size: 10.5px; }
+  table.compare tbody th{ width: 88px; }
+}
+</style>
+</head>
+<body>
+
+<div class="app-shell">
+
+  <!-- ============ HERO (stationary) ============ -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-kicker">A complimentary tool from Sheena &amp; Rosh</div>
+      <h1>Compare your rentals, side by side.</h1>
+      <p>You're weighing a few places, maybe over a few days of viewings. Lay them out here - rent, deposit, parking, pets, all of it - and see clearly which one actually fits you. It saves privately on this device as you go, and no one but you ever sees it.</p>
+      <div class="hero-credit">A free gift from <strong>Sheena &amp; Rosh Issac Property Group</strong> - because we'd love to help you find home when you're ready.</div>
+    </div>
+  </header>
+
+  <!-- ============ WORKSPACE (scrolls) ============ -->
+  <main class="workspace">
+    <div class="workspace-inner">
+
+      <!-- Step 1: Units -->
+      <section class="section" id="section-units">
+        <div class="restored-banner no-print" id="restoredBanner">
+          <span>Welcome back - we picked up right where you left off.</span>
+        </div>
+        <div class="section-head-row">
+          <div class="section-head">
+            <div class="section-eyebrow">Step 1</div>
+            <h2>Your shortlist</h2>
+            <p>Add 2 to 4 places you're considering. Fill in what you know and skip what you don't - it's saved privately on this device, so it's here next time you open this page, even a few days from now.</p>
+          </div>
+          <button class="start-over-link no-print" id="startOverBtn" type="button">Start over</button>
+        </div>
+
+        <div class="units-row" id="unitsRow"></div>
+
+        <div class="units-controls">
+          <button class="btn btn-ghost no-print" id="addUnitBtn" type="button">+ Add another place</button>
+        </div>
+      </section>
+
+      <!-- Step 2: Weights -->
+      <section class="section" id="section-weights">
+        <div class="section-head">
+          <div class="section-eyebrow">Step 2</div>
+          <h2>What matters most to you?</h2>
+          <p>Everyone weighs things differently. Tell us what counts and we'll do the maths - the numbers below, we score for you.</p>
+        </div>
+        <div class="weights-card" id="weightsCard"></div>
+      </section>
+
+      <!-- Step 3: Results -->
+      <section class="section" id="section-results">
+        <div class="section-head">
+          <div class="section-eyebrow">Step 3</div>
+          <h2>Here's how they stack up</h2>
+          <p>Based on the priorities you set above.</p>
+        </div>
+
+        <div class="results-note">
+          We only crunch the numbers on rent, deposit, bedrooms, bathrooms, parking, utilities and how each place felt to you. Pets, laundry, lease terms and commute are laid out plainly below - those are genuinely personal, so only you can weigh them.
+        </div>
+
+        <div class="score-bars" id="scoreBars"></div>
+        <div class="best-fit-callout" id="bestFitCallout"></div>
+
+        <div class="compare-wrap">
+          <table class="compare" id="compareTable"></table>
+        </div>
+        <div class="swipe-hint" id="swipeHint">Swipe left to compare all your places &rarr;</div>
+      </section>
+
+      <!-- Step 4: Soft nudge -->
+      <section class="section" id="section-nudge">
+        <div class="nudge-card">
+          <h3>Renting now, thinking ahead?</h3>
+          <p>No pressure at all - most of our clients rent for years before they buy. But whenever you're curious what buying could look like for you, we're glad to walk through it. No obligation, just a straight answer.</p>
+          <div class="nudge-actions">
+            <a class="btn btn-gold" href="mailto:rosh@issacrealty.com?subject=Thinking%20ahead%20about%20buying">Let's talk, whenever you're ready</a>
+            <button class="btn btn-ghost no-print" id="printBtn" type="button">Print or save as PDF</button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- ============ BROKERAGE BAND (stationary) ============ -->
+  <footer class="brokerage-band">
+    <div class="brokerage-inner">
+      <div>
+        <div class="brokerage-team">Sheena &amp; Rosh Issac Property Group</div>
+        <div class="brokerage-brokerage">Associates of Dreamhouse Realty Ltd.</div>
+      </div>
+      <div class="brokerage-contact">
+        <a href="tel:+18254495083">825 449 5083</a>
+        <a href="mailto:rosh@issacrealty.com">rosh@issacrealty.com</a>
+      </div>
+      <div class="brokerage-privacy">This tool runs entirely in your browser and saves your comparison privately on this device only, so it's here when you come back. We never see, collect, or receive anything you type here.</div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  var FIELD_DEFS = [
+    { key: "rent",      label: "Monthly rent ($)",      type: "number", placeholder: "1650" },
+    { key: "deposit",   label: "Security deposit ($)",  type: "number", placeholder: "1650" },
+    { key: "beds",      label: "Bedrooms",               type: "number", placeholder: "2", step: "0.5" },
+    { key: "baths",     label: "Bathrooms",              type: "number", placeholder: "1.5", step: "0.5" }
+  ];
+
+  var PARKING_OPTIONS = ["Not sure yet", "Included", "Not included"];
+  var UTIL_OPTIONS = ["Not sure yet", "All included", "Some included", "Tenant pays all"];
+
+  var WEIGHT_FACTORS = [
+    { key: "rent",      label: "Monthly rent" },
+    { key: "deposit",   label: "Security deposit" },
+    { key: "beds",      label: "Bedrooms" },
+    { key: "baths",     label: "Bathrooms" },
+    { key: "parking",   label: "Parking" },
+    { key: "utilities", label: "Heat & utilities included" },
+    { key: "condition", label: "Condition & feel" }
+  ];
+  var WEIGHT_LEVELS = [
+    { v: 0, label: "Not a priority" },
+    { v: 1, label: "Matters" },
+    { v: 2, label: "Top priority" }
+  ];
+
+  var TABLE_ROWS = [
+    { key: "rent",      label: "Monthly rent",       fmt: money, best: "low" },
+    { key: "deposit",   label: "Security deposit",   fmt: money, best: "low" },
+    { key: "beds",      label: "Bedrooms",           fmt: plain, best: "high" },
+    { key: "baths",     label: "Bathrooms",          fmt: plain, best: "high" },
+    { key: "parking",   label: "Parking",            fmt: parkingCell, best: "parking" },
+    { key: "utilities", label: "Heat & utilities",   fmt: utilCell, best: "utilities" },
+    { key: "laundry",   label: "Laundry",            fmt: textOr },
+    { key: "pets",      label: "Pet policy",         fmt: textOr },
+    { key: "lease",     label: "Lease length",       fmt: textOr },
+    { key: "commute",   label: "Commute",            fmt: textOr },
+    { key: "condition", label: "Condition & feel",   fmt: conditionCell, best: "condition" },
+    { key: "notes",     label: "Notes / must-haves", fmt: textOr }
+  ];
+
+  var uid = 0;
+  function nextId(){ uid += 1; return "u" + uid; }
+
+  var STORAGE_KEY = "issacRealty.rentalComparisonTool.v1";
+
+  var state = {
+    units: [
+      makeUnit("Unit 1"),
+      makeUnit("Unit 2")
+    ],
+    weights: { rent: 1, deposit: 1, beds: 1, baths: 1, parking: 1, utilities: 1, condition: 1 }
+  };
+
+  function makeUnit(name){
+    return {
+      id: nextId(),
+      nickname: name,
+      rent: "", deposit: "", beds: "", baths: "",
+      parking: "Not sure yet", parkingDetail: "",
+      utilities: "Not sure yet", utilitiesDetail: "",
+      laundry: "", pets: "", lease: "", commute: "",
+      condition: 3,
+      notes: ""
+    };
+  }
+
+  // ---------- local persistence (this device only - never sent anywhere) ----------
+  function saveState(){
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ units: state.units, weights: state.weights }));
+    }catch(e){ /* private browsing / storage disabled - fail silently, tool still works in-session */ }
+  }
+
+  function unitHasContent(u){
+    return !!(u.rent || u.deposit || u.beds || u.baths || u.parkingDetail || u.utilitiesDetail ||
+      u.laundry || u.pets || u.lease || u.commute || u.notes ||
+      (u.nickname && !/^Unit \d$/.test(u.nickname)));
+  }
+
+  function loadState(){
+    var raw;
+    try{ raw = localStorage.getItem(STORAGE_KEY); }catch(e){ return false; }
+    if (!raw) return false;
+    try{
+      var parsed = JSON.parse(raw);
+      if (!parsed || !Array.isArray(parsed.units) || parsed.units.length < 2) return false;
+      state.units = parsed.units.slice(0, 4).map(function(u){
+        var fresh = makeUnit(u.nickname || "");
+        Object.keys(fresh).forEach(function(k){ if (k !== "id" && u[k] !== undefined) fresh[k] = u[k]; });
+        return fresh;
+      });
+      if (parsed.weights){
+        WEIGHT_FACTORS.forEach(function(f){
+          if (typeof parsed.weights[f.key] === "number") state.weights[f.key] = parsed.weights[f.key];
+        });
+      }
+      return state.units.some(unitHasContent);
+    }catch(e){ return false; }
+  }
+
+  var unitsRow = document.getElementById("unitsRow");
+  var addUnitBtn = document.getElementById("addUnitBtn");
+  var weightsCard = document.getElementById("weightsCard");
+  var scoreBars = document.getElementById("scoreBars");
+  var bestFitCallout = document.getElementById("bestFitCallout");
+  var compareTable = document.getElementById("compareTable");
+  var printBtn = document.getElementById("printBtn");
+  var startOverBtn = document.getElementById("startOverBtn");
+  var restoredBanner = document.getElementById("restoredBanner");
+  var swipeHint = document.getElementById("swipeHint");
+
+  addUnitBtn.addEventListener("click", function(){
+    if (state.units.length >= 4) return;
+    state.units.push(makeUnit("Unit " + (state.units.length + 1)));
+    renderUnits();
+    renderAll();
+  });
+
+  printBtn.addEventListener("click", function(){ window.print(); });
+
+  startOverBtn.addEventListener("click", function(){
+    var ok = window.confirm("Clear everything you've entered and start a fresh comparison? This can't be undone.");
+    if (!ok) return;
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+    uid = 0;
+    state.units = [ makeUnit("Unit 1"), makeUnit("Unit 2") ];
+    state.weights = { rent: 1, deposit: 1, beds: 1, baths: 1, parking: 1, utilities: 1, condition: 1 };
+    restoredBanner.classList.remove("show");
+    renderUnits();
+    renderWeights();
+    renderAll();
+  });
+
+  function removeUnit(id){
+    if (state.units.length <= 2) return;
+    state.units = state.units.filter(function(u){ return u.id !== id; });
+    renderUnits();
+    renderAll();
+  }
+
+  function fieldEl(tag, attrs){
+    var el = document.createElement(tag);
+    Object.keys(attrs || {}).forEach(function(k){
+      if (k === "text") el.textContent = attrs[k];
+      else el.setAttribute(k, attrs[k]);
+    });
+    return el;
+  }
+
+  function renderUnits(){
+    unitsRow.innerHTML = "";
+    state.units.forEach(function(unit){
+      var card = document.createElement("div");
+      card.className = "unit-card";
+
+      var head = document.createElement("div");
+      head.className = "unit-card-head";
+      var nameInput = fieldEl("input", { type: "text", value: unit.nickname, placeholder: "e.g. 123 17 Ave SW", "aria-label": "Nickname or address for this unit" });
+      nameInput.value = unit.nickname;
+      nameInput.addEventListener("input", function(){ unit.nickname = nameInput.value; renderAll(); });
+      head.appendChild(nameInput);
+      if (state.units.length > 2){
+        var rm = fieldEl("button", { type: "button", "aria-label": "Remove this unit", text: "×" });
+        rm.className = "unit-remove no-print";
+        rm.addEventListener("click", function(){ removeUnit(unit.id); });
+        head.appendChild(rm);
+      }
+      card.appendChild(head);
+
+      var body = document.createElement("div");
+      body.className = "unit-card-body";
+
+      // rent + deposit
+      var row1 = document.createElement("div");
+      row1.className = "field-row2";
+      row1.appendChild(buildNumberField(unit, "rent", "Monthly rent ($)", "1650"));
+      row1.appendChild(buildNumberField(unit, "deposit", "Security deposit ($)", "1650"));
+      body.appendChild(row1);
+
+      var row2 = document.createElement("div");
+      row2.className = "field-row2";
+      row2.appendChild(buildNumberField(unit, "beds", "Bedrooms", "2", "0.5"));
+      row2.appendChild(buildNumberField(unit, "baths", "Bathrooms", "1.5", "0.5"));
+      body.appendChild(row2);
+
+      body.appendChild(buildSelectField(unit, "parking", "Parking", PARKING_OPTIONS));
+      body.appendChild(buildTextField(unit, "parkingDetail", "Parking detail", "e.g. 1 heated stall, or street only", true));
+
+      body.appendChild(buildSelectField(unit, "utilities", "Heat & utilities", UTIL_OPTIONS));
+      body.appendChild(buildTextField(unit, "utilitiesDetail", "Utilities detail", "e.g. heat + water included, power extra", true));
+
+      body.appendChild(buildTextField(unit, "laundry", "Laundry", "e.g. in-suite, shared coin laundry, none"));
+      body.appendChild(buildTextField(unit, "pets", "Pet policy", "e.g. cats OK, dogs under 25 lb, $300 pet deposit"));
+      body.appendChild(buildTextField(unit, "lease", "Lease length", "e.g. 12-month, then month-to-month"));
+      body.appendChild(buildTextField(unit, "commute", "Commute", "e.g. 18 min drive downtown, LRT 5 min walk"));
+
+      body.appendChild(buildConditionSlider(unit));
+
+      body.appendChild(buildTextareaField(unit, "notes", "Anything else that matters to you", "e.g. must allow my dog, need a dishwasher, want more natural light..."));
+
+      card.appendChild(body);
+      unitsRow.appendChild(card);
+    });
+
+    addUnitBtn.disabled = state.units.length >= 4;
+  }
+
+  function buildNumberField(unit, key, label, placeholder, step){
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    wrap.appendChild(fieldEl("span", { class: "field-label", text: label }));
+    var input = fieldEl("input", { type: "number", placeholder: placeholder, inputmode: "decimal", "aria-label": label });
+    if (step) input.setAttribute("step", step);
+    input.value = unit[key];
+    input.addEventListener("input", function(){ unit[key] = input.value; renderAll(); });
+    wrap.appendChild(input);
+    return wrap;
+  }
+
+  function buildTextField(unit, key, label, placeholder, small){
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    if (!small) wrap.appendChild(fieldEl("span", { class: "field-label", text: label }));
+    var input = fieldEl("input", { type: "text", placeholder: placeholder, "aria-label": label });
+    input.value = unit[key];
+    input.addEventListener("input", function(){ unit[key] = input.value; renderAll(); });
+    wrap.appendChild(input);
+    return wrap;
+  }
+
+  function buildTextareaField(unit, key, label, placeholder){
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    wrap.appendChild(fieldEl("span", { class: "field-label", text: label }));
+    var ta = fieldEl("textarea", { placeholder: placeholder, "aria-label": label });
+    ta.value = unit[key];
+    ta.addEventListener("input", function(){ unit[key] = ta.value; renderAll(); });
+    wrap.appendChild(ta);
+    return wrap;
+  }
+
+  function buildSelectField(unit, key, label, options){
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    wrap.appendChild(fieldEl("span", { class: "field-label", text: label }));
+    var sel = fieldEl("select", { "aria-label": label });
+    options.forEach(function(opt){
+      var o = fieldEl("option", { value: opt, text: opt });
+      if (unit[key] === opt) o.setAttribute("selected", "selected");
+      sel.appendChild(o);
+    });
+    sel.value = unit[key];
+    sel.addEventListener("change", function(){ unit[key] = sel.value; renderAll(); });
+    wrap.appendChild(sel);
+    return wrap;
+  }
+
+  function buildConditionSlider(unit){
+    var wrap = document.createElement("div");
+    wrap.className = "field";
+    wrap.appendChild(fieldEl("span", { class: "field-label", text: "Condition & feel" }));
+    wrap.appendChild(fieldEl("span", { class: "field-hint", text: "How did it feel when you walked through?" }));
+    var row = document.createElement("div");
+    row.className = "field-slider";
+    var input = fieldEl("input", { type: "range", min: "1", max: "5", step: "1", "aria-label": "Condition and feel rating" });
+    input.value = unit.condition;
+    var val = fieldEl("span", { class: "score-bar-pct field-slider-val", text: sliderLabel(unit.condition) });
+    val.style.color = "var(--text-soft)";
+    input.addEventListener("input", function(){ unit.condition = Number(input.value); val.textContent = sliderLabel(unit.condition); renderAll(); });
+    row.appendChild(input);
+    row.appendChild(val);
+    wrap.appendChild(row);
+    return wrap;
+  }
+
+  function sliderLabel(v){
+    v = Number(v);
+    var labels = { 1: "Needs work", 2: "A bit rough", 3: "Decent", 4: "Really liked it", 5: "Loved it" };
+    return labels[v] || "Decent";
+  }
+
+  function renderWeights(){
+    weightsCard.innerHTML = "";
+    WEIGHT_FACTORS.forEach(function(factor){
+      var row = document.createElement("div");
+      row.className = "weight-row";
+      row.appendChild(fieldEl("span", { class: "weight-label", text: factor.label }));
+      var pg = document.createElement("div");
+      pg.className = "pill-group";
+      WEIGHT_LEVELS.forEach(function(level){
+        var b = fieldEl("button", { type: "button", text: level.label });
+        if (state.weights[factor.key] === level.v) b.className = "active";
+        b.addEventListener("click", function(){
+          state.weights[factor.key] = level.v;
+          renderWeights();
+          renderResults();
+        });
+        pg.appendChild(b);
+      });
+      row.appendChild(pg);
+      weightsCard.appendChild(row);
+    });
+  }
+
+  /* ---------- scoring ---------- */
+  function num(v){ var n = parseFloat(v); return isNaN(n) ? null : n; }
+
+  function normalizeLowBetter(values){
+    var present = values.filter(function(v){ return v !== null; });
+    if (!present.length) return values.map(function(){ return null; });
+    var min = Math.min.apply(null, present), max = Math.max.apply(null, present);
+    return values.map(function(v){
+      if (v === null) return null;
+      if (max === min) return 100;
+      return ((max - v) / (max - min)) * 100;
+    });
+  }
+  function normalizeHighBetter(values){
+    var present = values.filter(function(v){ return v !== null; });
+    if (!present.length) return values.map(function(){ return null; });
+    var min = Math.min.apply(null, present), max = Math.max.apply(null, present);
+    return values.map(function(v){
+      if (v === null) return null;
+      if (max === min) return 100;
+      return ((v - min) / (max - min)) * 100;
+    });
+  }
+
+  function parkingScore(v){
+    if (v === "Included") return 100;
+    if (v === "Not included") return 0;
+    return null; // Not sure yet
+  }
+  function utilitiesScore(v){
+    if (v === "All included") return 100;
+    if (v === "Some included") return 50;
+    if (v === "Tenant pays all") return 0;
+    return null;
+  }
+  function conditionScore(v){
+    var n = Number(v);
+    if (isNaN(n)) return null;
+    return ((n - 1) / 4) * 100;
+  }
+
+  function computeScores(){
+    var units = state.units;
+    var rentScores = normalizeLowBetter(units.map(function(u){ return num(u.rent); }));
+    var depositScores = normalizeLowBetter(units.map(function(u){ return num(u.deposit); }));
+    var bedsScores = normalizeHighBetter(units.map(function(u){ return num(u.beds); }));
+    var bathsScores = normalizeHighBetter(units.map(function(u){ return num(u.baths); }));
+    var parkingScores = units.map(function(u){ return parkingScore(u.parking); });
+    var utilScores = units.map(function(u){ return utilitiesScore(u.utilities); });
+    var condScores = units.map(function(u){ return conditionScore(u.condition); });
+
+    var perFactor = {
+      rent: rentScores, deposit: depositScores, beds: bedsScores, baths: bathsScores,
+      parking: parkingScores, utilities: utilScores, condition: condScores
+    };
+
+    var sumWeights = 0;
+    WEIGHT_FACTORS.forEach(function(f){ sumWeights += state.weights[f.key]; });
+
+    return units.map(function(u, i){
+      var totalWeight = 0, totalScore = 0;
+      WEIGHT_FACTORS.forEach(function(f){
+        var s = perFactor[f.key][i];
+        if (s === null) return;
+        // If every factor has been marked "not a priority", fall back to an equal-weight average.
+        var w = sumWeights === 0 ? 1 : state.weights[f.key];
+        totalScore += s * w;
+        totalWeight += w;
+      });
+      var score = totalWeight > 0 ? (totalScore / totalWeight) : null;
+      return { unit: u, score: score };
+    });
+  }
+
+  function money(v){ var n = num(v); return n === null ? "-" : "$" + n.toLocaleString(); }
+  function plain(v){ return (v === "" || v === null || v === undefined) ? "-" : String(v); }
+  function textOr(v){ return (v === "" || v === null || v === undefined) ? "-" : String(v); }
+  function parkingCell(u){
+    var base = u.parking === "Not sure yet" ? "" : u.parking;
+    var detail = u.parkingDetail ? (base ? " - " + u.parkingDetail : u.parkingDetail) : "";
+    var out = (base + detail).trim();
+    return out || "-";
+  }
+  function utilCell(u){
+    var base = u.utilities === "Not sure yet" ? "" : u.utilities;
+    var detail = u.utilitiesDetail ? (base ? " - " + u.utilitiesDetail : u.utilitiesDetail) : "";
+    var out = (base + detail).trim();
+    return out || "-";
+  }
+  function conditionCell(u){ return sliderLabel(u.condition) + " (" + u.condition + "/5)"; }
+
+  function renderResults(){
+    var scored = computeScores();
+    var maxScore = Math.max.apply(null, scored.map(function(s){ return s.score || 0; }));
+
+    // Bars
+    scoreBars.innerHTML = "";
+    scored.forEach(function(s){
+      var row = document.createElement("div");
+      row.className = "score-bar-row";
+      row.appendChild(fieldEl("span", { class: "score-bar-name", text: s.unit.nickname || "Unnamed" }));
+      var track = document.createElement("div");
+      track.className = "score-bar-track";
+      var pct = s.score === null ? 0 : Math.round(s.score);
+      var fill = document.createElement("div");
+      fill.className = "score-bar-fill" + (s.score !== null && s.score === maxScore && maxScore > 0 ? " leader" : "");
+      fill.style.width = Math.max(pct, 8) + "%";
+      fill.appendChild(fieldEl("span", { class: "score-bar-pct", text: (s.score === null ? "-" : pct + "%") }));
+      track.appendChild(fill);
+      row.appendChild(track);
+      scoreBars.appendChild(row);
+    });
+
+    // Best fit callout
+    var withScores = scored.filter(function(s){ return s.score !== null; });
+    bestFitCallout.innerHTML = "";
+    if (withScores.length){
+      var leader = withScores.reduce(function(a, b){ return (b.score > a.score) ? b : a; });
+      var tag = fieldEl("span", { class: "tag", text: "On the numbers" });
+      var p = document.createElement("p");
+      p.innerHTML = "<strong>" + escapeHtml(leader.unit.nickname || "This one") + "</strong> comes out ahead based on what you weighted. Trust your gut on the rest - the numbers are only part of the story.";
+      bestFitCallout.appendChild(tag);
+      bestFitCallout.appendChild(p);
+    } else {
+      var tag2 = fieldEl("span", { class: "tag", text: "Getting started" });
+      var p2 = document.createElement("p");
+      p2.textContent = "Add a few details above - rent, deposit, bedrooms - and we'll show you how your places stack up.";
+      bestFitCallout.appendChild(tag2);
+      bestFitCallout.appendChild(p2);
+    }
+
+    // Table
+    renderTable(scored);
+
+    // Swipe hint - only relevant on narrow screens once there's more than 2 columns to scroll through
+    if (swipeHint) swipeHint.classList.toggle("show", state.units.length > 2);
+
+    saveState();
+  }
+
+  function renderTable(scored){
+    var units = state.units;
+    compareTable.innerHTML = "";
+    var thead = document.createElement("thead");
+    var trh = document.createElement("tr");
+    trh.appendChild(fieldEl("th", { text: "" }));
+    units.forEach(function(u){ trh.appendChild(fieldEl("th", { text: u.nickname || "Unnamed" })); });
+    thead.appendChild(trh);
+    compareTable.appendChild(thead);
+
+    var tbody = document.createElement("tbody");
+
+    // Fit score row
+    var scoreRow = document.createElement("tr");
+    scoreRow.appendChild(fieldEl("th", { text: "Fit score" }));
+    var maxS = Math.max.apply(null, scored.map(function(s){ return s.score === null ? -1 : s.score; }));
+    scored.forEach(function(s){
+      var td = document.createElement("td");
+      td.textContent = s.score === null ? "-" : Math.round(s.score) + " / 100";
+      if (s.score !== null && s.score === maxS && maxS > 0) td.className = "best";
+      scoreRow.appendChild(td);
+    });
+    tbody.appendChild(scoreRow);
+
+    TABLE_ROWS.forEach(function(rowDef){
+      var tr = document.createElement("tr");
+      tr.appendChild(fieldEl("th", { text: rowDef.label }));
+      var raw = units.map(function(u){
+        if (rowDef.key === "parking") return parkingCell(u);
+        if (rowDef.key === "utilities") return utilCell(u);
+        if (rowDef.key === "condition") return conditionCell(u);
+        return rowDef.fmt(u[rowDef.key]);
+      });
+      var bestIdx = -1;
+      if (rowDef.best === "low" || rowDef.best === "high"){
+        var nums = units.map(function(u){ return num(u[rowDef.key]); });
+        var present = nums.filter(function(n){ return n !== null; });
+        if (present.length > 1){
+          var target = rowDef.best === "low" ? Math.min.apply(null, present) : Math.max.apply(null, present);
+          bestIdx = nums.indexOf(target);
+        }
+      } else if (rowDef.best === "parking"){
+        var pScores = units.map(function(u){ return parkingScore(u.parking); });
+        var pPresent = pScores.filter(function(n){ return n !== null; });
+        if (pPresent.length > 1 && Math.max.apply(null, pPresent) > Math.min.apply(null, pPresent)){
+          bestIdx = pScores.indexOf(Math.max.apply(null, pPresent));
+        }
+      } else if (rowDef.best === "utilities"){
+        var uScores = units.map(function(u){ return utilitiesScore(u.utilities); });
+        var uPresent = uScores.filter(function(n){ return n !== null; });
+        if (uPresent.length > 1 && Math.max.apply(null, uPresent) > Math.min.apply(null, uPresent)){
+          bestIdx = uScores.indexOf(Math.max.apply(null, uPresent));
+        }
+      } else if (rowDef.best === "condition"){
+        var cVals = units.map(function(u){ return Number(u.condition); });
+        if (Math.max.apply(null, cVals) > Math.min.apply(null, cVals)){
+          bestIdx = cVals.indexOf(Math.max.apply(null, cVals));
+        }
+      }
+      raw.forEach(function(text, i){
+        var td = document.createElement("td");
+        td.textContent = text;
+        if (i === bestIdx) td.className = "best";
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+
+    compareTable.appendChild(tbody);
+  }
+
+  function escapeHtml(s){
+    return String(s).replace(/[&<>"']/g, function(c){
+      return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
+    });
+  }
+
+  function renderAll(){ renderResults(); }
+
+  // init - restore a saved comparison from this device if one exists
+  var restored = loadState();
+  if (restored) restoredBanner.classList.add("show");
+  renderUnits();
+  renderWeights();
+  renderResults();
+})();
+</script>
+</body>
+</html>
